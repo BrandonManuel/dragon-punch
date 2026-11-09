@@ -2,11 +2,10 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+
 # states
 var is_hit: bool = false
-
-
-
+	
 func _physics_process(delta: float) -> void:
 	handle_input()
 

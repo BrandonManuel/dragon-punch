@@ -1,50 +1,7 @@
 [gd_scene format=3 uid="uid://buo8ribi0xhcq"]
 
 [ext_resource type="PackedScene" uid="uid://m5kdt21sku7o" path="res://Assets/Scenes/player.tscn" id="1_nbu75"]
-[ext_resource type="Texture2D" uid="uid://4fi7qqwxgsxy" path="res://Assets/Sprites/boxer_enemy.png" id="2_pfbgl"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lcp10"]
-atlas = ExtResource("2_pfbgl")
-region = Rect2(0, 0, 91, 178)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pb48a"]
-atlas = ExtResource("2_pfbgl")
-region = Rect2(91, 0, 91, 178)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hni1o"]
-atlas = ExtResource("2_pfbgl")
-region = Rect2(182, 0, 91, 178)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iusbg"]
-atlas = ExtResource("2_pfbgl")
-region = Rect2(273, 0, 91, 178)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_of3jj"]
-atlas = ExtResource("2_pfbgl")
-region = Rect2(364, 0, 91, 178)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_cea73"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lcp10")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pb48a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hni1o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iusbg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_of3jj")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="PackedScene" uid="uid://b38doq6uylmw2" path="res://Assets/Scenes/boxer.tscn" id="2_pfbgl"]
 
 [node name="Game" type="Node2D" unique_id=232270131]
 
@@ -54,11 +11,9 @@ animations = [{
 z_index = 1
 position = Vector2(0, 77)
 
-[node name="Boxer" type="AnimatedSprite2D" parent="." unique_id=137685483]
-z_index = -1
+[node name="Boxer" parent="." unique_id=879145682 instance=ExtResource("2_pfbgl")]
 position = Vector2(0, 34)
-sprite_frames = SubResource("SpriteFrames_cea73")
-autoplay = "default"
-frame_progress = 0.89722216
+idle_min_timer = 0.5
+idle_max_timer = 1.0
 
 [editable path="Player"]
