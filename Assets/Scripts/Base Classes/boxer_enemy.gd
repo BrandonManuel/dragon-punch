@@ -1,3 +1,5 @@
+class_name Boxer
+
 extends AnimatedSprite2D
 
 @onready var idle_timer: Timer = $IdleTimer

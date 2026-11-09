@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://0k47jqjqahvw"]
+
+[ext_resource type="PackedScene" uid="uid://b38doq6uylmw2" path="res://Assets/Scenes/boxer.tscn" id="1_kwswv"]
+[ext_resource type="Script" uid="uid://daq512syagth4" path="res://Assets/Scripts/bob.gd" id="2_6tih0"]
+
+[node name="Bob" unique_id=879145682 instance=ExtResource("1_kwswv")]
+script = ExtResource("2_6tih0")
+idle_min_timer = 0.5
+idle_max_timer = 1.5

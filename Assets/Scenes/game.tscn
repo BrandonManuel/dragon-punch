@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://buo8ribi0xhcq"]
 
 [ext_resource type="PackedScene" uid="uid://m5kdt21sku7o" path="res://Assets/Scenes/player.tscn" id="1_nbu75"]
-[ext_resource type="PackedScene" uid="uid://b38doq6uylmw2" path="res://Assets/Scenes/boxer.tscn" id="2_pfbgl"]
+[ext_resource type="PackedScene" uid="uid://0k47jqjqahvw" path="res://Assets/Scenes/bob.tscn" id="2_pfbgl"]
 
 [node name="Game" type="Node2D" unique_id=232270131]
 
@@ -11,9 +11,7 @@
 z_index = 1
 position = Vector2(0, 77)
 
-[node name="Boxer" parent="." unique_id=879145682 instance=ExtResource("2_pfbgl")]
-position = Vector2(0, 34)
-idle_min_timer = 0.5
-idle_max_timer = 1.0
+[node name="Bob" parent="." unique_id=879145682 instance=ExtResource("2_pfbgl")]
+position = Vector2(0, 40)
 
 [editable path="Player"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b38doq6uylmw2"]
 
 [ext_resource type="Texture2D" uid="uid://4fi7qqwxgsxy" path="res://Assets/Sprites/boxer_enemy.png" id="1_ldcd5"]
-[ext_resource type="Script" uid="uid://daq512syagth4" path="res://Assets/Scripts/boxer.gd" id="2_6tih0"]
+[ext_resource type="Script" uid="uid://8k4kls8dau30" path="res://Assets/Scripts/Base Classes/boxer_enemy.gd" id="2_6tih0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lcp10"]
 atlas = ExtResource("1_ldcd5")
