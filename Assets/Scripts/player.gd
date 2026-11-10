@@ -6,10 +6,13 @@ extends CharacterBody2D
 var queued_punch_animation = ''
 var flip = false
 
+# signals
+signal punch
+
 # states
 var is_hit: bool = false
 	
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	handle_input()
 
 
@@ -52,3 +55,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	#	reset sprite flip after animation is complete
 		animated_sprite_2d.flip_h = false
 		animated_sprite_2d.play("idle")
+
+
+func _on_animated_sprite_2d_animation_changed() -> void:
+	if animated_sprite_2d and animated_sprite_2d.animation.contains("punch") and animated_sprite_2d.animation != 'punch_windup':
+		punch.emit()

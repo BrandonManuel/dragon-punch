@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://buo8ribi0xhcq"]
 
+[ext_resource type="Script" uid="uid://1mtrmnvge7i2" path="res://Assets/Scripts/game.gd" id="1_lcp10"]
 [ext_resource type="PackedScene" uid="uid://m5kdt21sku7o" path="res://Assets/Scenes/player.tscn" id="1_nbu75"]
 [ext_resource type="PackedScene" uid="uid://0k47jqjqahvw" path="res://Assets/Scenes/bob.tscn" id="2_pfbgl"]
 
 [node name="Game" type="Node2D" unique_id=232270131]
+script = ExtResource("1_lcp10")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1455889871]
 
@@ -11,7 +13,15 @@
 z_index = 1
 position = Vector2(0, 77)
 
+[node name="AnimatedSprite2D" parent="Player" index="1" unique_id=1825198059]
+animation = &"punch_low"
+
 [node name="Bob" parent="." unique_id=879145682 instance=ExtResource("2_pfbgl")]
 position = Vector2(0, 40)
+frame = 0
+frame_progress = 0.0
+
+[connection signal="punch" from="Player" to="Bob" method="_on_player_punch"]
+[connection signal="frame_changed" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_frame_changed"]
 
 [editable path="Player"]
