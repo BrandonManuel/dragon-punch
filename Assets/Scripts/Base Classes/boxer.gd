@@ -45,3 +45,7 @@ func idle_wait() -> void:
 func reset_position() -> void:
 	position_tween = create_tween()
 	position_tween.tween_property(self, "position", starting_position, .05)
+
+
+func _on_animation_finished() -> void:
+	flip_h = false

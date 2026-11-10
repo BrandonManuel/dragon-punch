@@ -59,4 +59,4 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_animated_sprite_2d_animation_changed() -> void:
 	if animated_sprite_2d and animated_sprite_2d.animation.contains("punch") and animated_sprite_2d.animation != 'punch_windup':
-		punch.emit()
+		punch.emit(animated_sprite_2d.animation.contains("high"), animated_sprite_2d.flip_h)
