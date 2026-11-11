@@ -22,17 +22,28 @@ func _on_player_punch(high: bool, flip:  bool) -> void:
 				play('hit_high_left')
 		else:
 			play('hit_low')
+			
+	is_vulnerable = false
 
 func _process(delta: float) -> void:
 	if can_attack and attack_timer.time_left == 0:
 		var time := randf_range(attack_min_timer, attack_max_timer)
 		attack_timer.start(time)
+		
+	if animation.contains('punch') and frame == sprite_frames.get_frame_count(animation) - 1:
+		is_vulnerable = true
+	else:
+		is_vulnerable = false
 
 func attack() -> void:
 	can_attack = false
 	position_tween = create_tween()
 	position_tween.tween_property(self, "position", starting_position + Vector2(0, 20), .1)
-	play('punch_low_left')
+#	50/50 to flip punch
+	if randi_range(0, 1):
+		flip_h = true
+		
+	play('punch_hook_left')	
 	
 func reset() -> void:
 	can_attack = true
