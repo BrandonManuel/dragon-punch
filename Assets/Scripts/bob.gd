@@ -23,6 +23,14 @@ func _on_player_punch(high: bool, flip:  bool) -> void:
 		else:
 			play('hit_low')
 			
+	else:
+		can_attack = false
+		attack_timer.paused = true
+		position_tween = create_tween()
+		position_tween.tween_property(self, "position", starting_position + Vector2(0, -2.5), .1)
+		
+		if not high:
+			play('block_low')
 	is_vulnerable = false
 
 func _process(delta: float) -> void:
@@ -49,4 +57,5 @@ func reset() -> void:
 	can_attack = true
 	var time := randf_range(attack_min_timer, attack_max_timer)
 	attack_timer.start(time)
+	attack_timer.paused = false
 	super()

@@ -39,7 +39,7 @@ func idle() -> void:
 
 func idle_wait() -> void:
 	var wait_time := 0.0
-	if animation.contains('hit') or animation.contains('punch'):
+	if animation.contains('hit') or animation.contains('punch') or animation.contains('block'):
 		reset()
 		play('idle')
 		idle_timer.start(wait_time)
