@@ -51,6 +51,8 @@ func _process(delta: float) -> void:
 			punch.emit(flip_h)
 	else:
 		is_vulnerable = false
+		
+	super(delta)
 
 func attack() -> void:
 	can_attack = false
@@ -62,6 +64,9 @@ func attack() -> void:
 		
 	play('punch_hook_left')	
 
+func was_dodged() -> void:
+	super()
+	
 	
 func reset() -> void:
 	can_attack = true

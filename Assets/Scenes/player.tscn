@@ -242,9 +242,7 @@ shape = SubResource("CapsuleShape2D_n3wst")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1825198059]
 sprite_frames = SubResource("SpriteFrames_cea73")
-animation = &"hit_right"
-frame = 6
-frame_progress = 1.0
+animation = &"dodge_right"
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

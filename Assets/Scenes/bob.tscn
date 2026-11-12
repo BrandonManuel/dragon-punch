@@ -178,10 +178,10 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [{
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_47o76")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_83ip8")
 }, {
 "duration": 1.0,
@@ -206,3 +206,6 @@ idle_min_timer = 0.5
 idle_max_timer = 1.5
 attack_min_timer = 1.0
 attack_max_timer = 4.0
+
+[node name="WasDodgedTimer" parent="." index="2" unique_id=485130715]
+wait_time = 2.0

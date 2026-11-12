@@ -8,6 +8,7 @@ var flip = false
 
 # signals
 signal punch
+signal dodge
 	
 func _process(delta: float) -> void:
 	handle_input()
@@ -52,6 +53,8 @@ func is_hit(flip: bool) -> void:
 			animation = 'hit_left'
 			
 		animated_sprite_2d.play(animation)
+	else:
+		dodge.emit()
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 #	play appropriate punch after windup

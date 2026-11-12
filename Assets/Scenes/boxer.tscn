@@ -16,4 +16,6 @@ script = ExtResource("2_6tih0")
 [node name="AttackTimer" type="Timer" parent="." unique_id=497428591]
 one_shot = true
 
+[node name="WasDodgedTimer" type="Timer" parent="." unique_id=485130715]
+
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

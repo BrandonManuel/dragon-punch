@@ -19,6 +19,7 @@ animation = &"punch_low"
 [node name="Bob" parent="." unique_id=879145682 instance=ExtResource("2_pfbgl")]
 position = Vector2(0, 40)
 attack_max_timer = 2.0
+was_dodged_wait_time = 2.0
 
 [connection signal="punch" from="Player" to="Bob" method="_on_player_punch"]
 [connection signal="frame_changed" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_frame_changed"]
