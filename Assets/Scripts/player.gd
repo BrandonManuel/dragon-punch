@@ -8,16 +8,13 @@ var flip = false
 
 # signals
 signal punch
-
-# states
-var is_hit: bool = false
 	
 func _process(delta: float) -> void:
 	handle_input()
 
 
 func handle_input() -> void:
-	if animated_sprite_2d.is_playing() and (animated_sprite_2d.animation.contains('punch') or animated_sprite_2d.animation.contains('dodge')):
+	if animated_sprite_2d.is_playing() and (animated_sprite_2d.animation.contains('punch') or animated_sprite_2d.animation.contains('dodge') or animated_sprite_2d.animation.contains('hit')):
 		return
 		
 	var animation := 'idle'
@@ -42,6 +39,19 @@ func handle_input() -> void:
 	
 	animated_sprite_2d.play(animation)
 
+func is_hit(flip: bool) -> void:
+	var hit := false
+	var animation := 'hit_right'
+	if not animated_sprite_2d.is_playing():
+		hit = true
+	elif not animated_sprite_2d.animation.contains('block') and not animated_sprite_2d.animation.contains('dodge'):
+		hit = true
+	
+	if hit:
+		if flip:
+			animation = 'hit_left'
+			
+		animated_sprite_2d.play(animation)
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 #	play appropriate punch after windup

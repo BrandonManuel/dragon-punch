@@ -17,9 +17,15 @@ func _on_player_punch(high: bool, flip:  bool) -> void:
 		
 		if high:
 			if flip:
-				play('hit_high_right')
+				if flip_h:
+					play('hit_high_left')
+				else:
+					play('hit_high_right')
 			else:
-				play('hit_high_left')
+				if flip_h:
+					play('hit_high_right')
+				else:
+					play('hit_high_left')
 		else:
 			play('hit_low')
 			
@@ -38,8 +44,11 @@ func _process(delta: float) -> void:
 		var time := randf_range(attack_min_timer, attack_max_timer)
 		attack_timer.start(time)
 		
-	if animation.contains('punch') and frame == sprite_frames.get_frame_count(animation) - 1:
-		is_vulnerable = true
+	if animation.contains('punch'):
+		if frame == sprite_frames.get_frame_count(animation) - 1:
+			is_vulnerable = true
+		elif frame == sprite_frames.get_frame_count(animation) - 2:
+			punch.emit(flip_h)
 	else:
 		is_vulnerable = false
 
@@ -52,6 +61,7 @@ func attack() -> void:
 		flip_h = true
 		
 	play('punch_hook_left')	
+
 	
 func reset() -> void:
 	can_attack = true

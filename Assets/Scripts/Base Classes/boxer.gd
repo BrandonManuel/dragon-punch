@@ -19,6 +19,9 @@ var position_tween: Tween
 var is_vulnerable: bool = true
 var can_attack: bool = true
 
+# signals
+signal punch
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	starting_position = position
