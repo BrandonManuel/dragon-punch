@@ -72,6 +72,10 @@ region = Rect2(140, 178, 140, 178)
 atlas = ExtResource("2_touob")
 region = Rect2(280, 178, 140, 178)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn1fh"]
+atlas = ExtResource("2_touob")
+region = Rect2(140, 356, 140, 178)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6uxg"]
 atlas = ExtResource("2_touob")
 region = Rect2(0, 0, 140, 178)
@@ -192,6 +196,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_tn1fh")
+}],
+"loop": 1,
+"name": &"hit_stun",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_g6uxg")
 }, {
 "duration": 1.0,
@@ -233,12 +245,14 @@ animations = [{
 
 [node name="Bob" unique_id=879145682 instance=ExtResource("1_kwswv")]
 sprite_frames = SubResource("SpriteFrames_r2ci8")
-animation = &"block_high"
+animation = &"hit_high_left"
 script = ExtResource("2_6tih0")
 idle_min_timer = 0.5
 idle_max_timer = 1.5
-attack_min_timer = 1.0
+attack_min_timer = 1.5
 attack_max_timer = 4.0
+was_dodged_wait_time = 0.5
+hit_stun_time = 2.0
 
-[node name="WasDodgedTimer" parent="." index="2" unique_id=485130715]
-wait_time = 2.0
+[node name="HitStunTimer" parent="." index="3" unique_id=776436518]
+one_shot = true

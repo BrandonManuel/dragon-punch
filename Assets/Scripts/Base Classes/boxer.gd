@@ -4,6 +4,7 @@ extends AnimatedSprite2D
 
 @onready var idle_timer: Timer = $IdleTimer
 @onready var was_dodged_timer: Timer = $WasDodgedTimer
+@onready var hit_stun_timer: Timer = $HitStunTimer
 
 @export var idle_min_timer: float
 @export var idle_max_timer: float
@@ -12,6 +13,8 @@ extends AnimatedSprite2D
 @export var attack_max_timer: float
 
 @export var was_dodged_wait_time: float
+
+@export var hit_stun_time: float
 
 var starting_position: Vector2
 
@@ -30,6 +33,7 @@ signal punch
 func _ready() -> void:
 	starting_position = position
 	idle_timer.timeout.connect(idle)
+	hit_stun_timer.timeout.connect(reset)
 	was_dodged_timer.timeout.connect(reset_dodged_flag)
 	animation_finished.connect(idle_wait)
 	
@@ -40,7 +44,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if missed and is_vulnerable and is_playing(): 
+	if missed and is_vulnerable and animation.contains('punch') and is_playing(): 
 		pause()
 		was_dodged_timer.start(was_dodged_wait_time)
 
@@ -52,6 +56,9 @@ func idle() -> void:
 func idle_wait() -> void:
 	var wait_time := 0.0
 	if animation.contains('hit') or animation.contains('punch') or animation.contains('block'):
+		if hit_stun_timer.time_left:
+			return
+			
 		reset()
 		play('idle')
 		idle_timer.start(wait_time)
@@ -66,7 +73,7 @@ func reset() -> void:
 	position_tween = create_tween()
 	position_tween.tween_property(self, "position", starting_position, .05)
 	
-	if not is_playing() and animation != 'idle':
+	if animation == 'hit_stun' or not is_playing() and animation != 'idle':
 		idle()
 
 func was_dodged() -> void:

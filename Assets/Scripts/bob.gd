@@ -4,14 +4,15 @@ extends Boxer
 	
 func _ready() -> void:
 	attack_timer.timeout.connect(attack)
-	animation_finished.connect(reset)
+	animation_finished.connect(handle_animation_finished)
 	
 	print('Bob ready')
 	super()
 	
-func _on_player_punch(high: bool, flip:  bool) -> void:
+func _on_player_punch(high: bool, flip: bool) -> void:
 	if is_vulnerable:
 		can_attack = false
+		position = starting_position
 		position_tween = create_tween()
 		position_tween.tween_property(self, "position", starting_position + Vector2(0, -5), .1)
 		
@@ -29,7 +30,9 @@ func _on_player_punch(high: bool, flip:  bool) -> void:
 		else:
 			play('hit_low')
 			
-	else:
+		if not hit_stun_timer.time_left:
+			hit_stun_timer.start(hit_stun_time)
+	elif not animation.contains('punch'):
 		can_attack = false
 		attack_timer.paused = true
 		position_tween = create_tween()
@@ -39,7 +42,6 @@ func _on_player_punch(high: bool, flip:  bool) -> void:
 			play('block_high')
 		else:
 			play('block_low')
-	is_vulnerable = false
 
 func _process(delta: float) -> void:
 	if can_attack and attack_timer.time_left == 0:
@@ -51,6 +53,8 @@ func _process(delta: float) -> void:
 			is_vulnerable = true
 		elif frame == sprite_frames.get_frame_count(animation) - 2:
 			punch.emit(flip_h)
+	elif animation.contains('stun') or hit_stun_timer.time_left:
+		is_vulnerable = true
 	else:
 		is_vulnerable = false
 		
@@ -69,10 +73,17 @@ func attack() -> void:
 func was_dodged() -> void:
 	super()
 	
+func handle_animation_finished() -> void:
+	if hit_stun_timer.time_left or animation.contains('stun'):
+		play('hit_stun')
+	else:
+		reset()
 	
 func reset() -> void:
 	can_attack = true
-	var time := randf_range(attack_min_timer, attack_max_timer)
-	attack_timer.start(time)
+	if not attack_timer.time_left:
+		var time := randf_range(attack_min_timer, attack_max_timer)
+		attack_timer.start(time)
+		
 	attack_timer.paused = false
 	super()
