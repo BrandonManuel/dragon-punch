@@ -35,7 +35,9 @@ func _on_player_punch(high: bool, flip:  bool) -> void:
 		position_tween = create_tween()
 		position_tween.tween_property(self, "position", starting_position + Vector2(0, -2.5), .1)
 		
-		if not high:
+		if high:
+			play('block_high')
+		else:
 			play('block_low')
 	is_vulnerable = false
 

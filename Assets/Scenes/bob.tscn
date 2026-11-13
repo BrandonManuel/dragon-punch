@@ -4,6 +4,22 @@
 [ext_resource type="Script" uid="uid://daq512syagth4" path="res://Assets/Scripts/bob.gd" id="2_6tih0"]
 [ext_resource type="Texture2D" uid="uid://4fi7qqwxgsxy" path="res://Assets/Sprites/boxer_enemy.png" id="2_touob"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt7vr"]
+atlas = ExtResource("2_touob")
+region = Rect2(0, 1068, 140, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o117"]
+atlas = ExtResource("2_touob")
+region = Rect2(140, 1068, 140, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1qg3"]
+atlas = ExtResource("2_touob")
+region = Rect2(280, 1068, 140, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8fpi"]
+atlas = ExtResource("2_touob")
+region = Rect2(420, 1068, 140, 178)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1tw1j"]
 atlas = ExtResource("2_touob")
 region = Rect2(140, 890, 140, 178)
@@ -98,6 +114,23 @@ region = Rect2(560, 712, 140, 178)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r2ci8"]
 animations = [{
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_pt7vr")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_4o117")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_m1qg3")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_g8fpi")
+}],
+"loop": 0,
+"name": &"block_high",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_1tw1j")
@@ -200,7 +233,7 @@ animations = [{
 
 [node name="Bob" unique_id=879145682 instance=ExtResource("1_kwswv")]
 sprite_frames = SubResource("SpriteFrames_r2ci8")
-animation = &"punch_hook_left"
+animation = &"block_high"
 script = ExtResource("2_6tih0")
 idle_min_timer = 0.5
 idle_max_timer = 1.5
