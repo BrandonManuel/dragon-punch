@@ -5,6 +5,8 @@ extends AnimatedSprite2D
 @onready var idle_timer: Timer = $IdleTimer
 @onready var was_dodged_timer: Timer = $WasDodgedTimer
 @onready var hit_stun_timer: Timer = $HitStunTimer
+@onready var blocked_timer: Timer = $BlockedTimer
+@onready var attack_timer: Timer = $AttackTimer
 
 @export var idle_min_timer: float
 @export var idle_max_timer: float
@@ -25,6 +27,7 @@ var position_tween: Tween
 var is_vulnerable: bool = true
 var can_attack: bool = true
 var missed: bool = false
+var blocked: bool = false
 
 # signals
 signal punch
@@ -35,6 +38,8 @@ func _ready() -> void:
 	idle_timer.timeout.connect(idle)
 	hit_stun_timer.timeout.connect(reset)
 	was_dodged_timer.timeout.connect(reset_dodged_flag)
+	blocked_timer.timeout.connect(reset_blocked_flag)
+	
 	animation_finished.connect(idle_wait)
 	
 	idle()
@@ -44,6 +49,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if blocked:
+		return
+		
 	if missed and is_vulnerable and animation.contains('punch') and is_playing(): 
 		pause()
 		was_dodged_timer.start(was_dodged_wait_time)
@@ -78,10 +86,25 @@ func reset() -> void:
 
 func was_dodged() -> void:
 	missed = true
+	can_attack = false
+	attack_timer.paused = true
+	
+func was_blocked(blocked_time: float) -> void:
+	blocked = true
+	can_attack = false
+	attack_timer.paused = true
+	pause()
+	blocked_timer.start(blocked_time)
 	
 func reset_dodged_flag() -> void:
 	missed = false
+	can_attack = true
 	play()
+	
+func reset_blocked_flag() -> void:
+	blocked = false
+	can_attack = true
+	reset()
 
 func _on_animation_finished() -> void:
 	flip_h = false

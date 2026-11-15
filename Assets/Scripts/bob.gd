@@ -1,6 +1,4 @@
 extends Boxer
-
-@onready var attack_timer: Timer = $AttackTimer
 	
 func _ready() -> void:
 	attack_timer.timeout.connect(attack)
@@ -44,6 +42,9 @@ func _on_player_punch(high: bool, flip: bool) -> void:
 			play('block_low')
 
 func _process(delta: float) -> void:
+	if blocked:
+		return
+		
 	if can_attack and attack_timer.time_left == 0:
 		var time := randf_range(attack_min_timer, attack_max_timer)
 		attack_timer.start(time)

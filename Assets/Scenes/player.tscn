@@ -7,6 +7,10 @@
 radius = 13.0
 height = 100.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6hru"]
+atlas = ExtResource("1_6cd4h")
+region = Rect2(0, 1200, 100, 200)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_38rej"]
 atlas = ExtResource("1_6cd4h")
 region = Rect2(100, 200, 100, 200)
@@ -113,6 +117,14 @@ region = Rect2(100, 200, 100, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cea73"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6hru")
+}],
+"loop": 1,
+"name": &"block",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_38rej")
@@ -235,6 +247,7 @@ animations = [{
 [node name="Player" type="CharacterBody2D" unique_id=1593045794]
 motion_mode = 1
 script = ExtResource("1_7dd06")
+successful_block_time = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=268615705]
 position = Vector2(0, 28)
@@ -242,7 +255,9 @@ shape = SubResource("CapsuleShape2D_n3wst")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1825198059]
 sprite_frames = SubResource("SpriteFrames_cea73")
-animation = &"punch_low"
+animation = &"block"
+
+[node name="BlockTimer" type="Timer" parent="." unique_id=580788456]
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

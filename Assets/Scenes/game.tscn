@@ -13,9 +13,6 @@ script = ExtResource("1_lcp10")
 z_index = 1
 position = Vector2(0, 77)
 
-[node name="AnimatedSprite2D" parent="Player" index="1" unique_id=1825198059]
-animation = &"punch_low"
-
 [node name="Bob" parent="." unique_id=879145682 instance=ExtResource("2_pfbgl")]
 position = Vector2(0, 40)
 

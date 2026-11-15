@@ -6,6 +6,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	bob.punch.connect(player.is_hit)
+	player.blocked.connect(bob.was_blocked)
 	player.dodge.connect(bob.was_dodged)
 
 

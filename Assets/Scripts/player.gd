@@ -1,16 +1,29 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var block_timer: Timer = $BlockTimer
+
+@export var successful_block_time: float = 1.0
 
 # globals
 var queued_punch_animation = ''
 var flip = false
 
+# state
+var blocking: bool = false
+
 # signals
 signal punch
 signal dodge
+signal blocked
+
+func _ready() -> void:
+	block_timer.timeout.connect(toggle_block_off)
 	
 func _process(delta: float) -> void:
+	if blocking:
+		return
+		
 	handle_input()
 
 
@@ -19,6 +32,11 @@ func handle_input() -> void:
 		return
 		
 	var animation := 'idle'
+		
+#	handle block
+	if Input.is_action_pressed("down"):
+		animated_sprite_2d.play('block')
+		return
 		
 #	handle punch
 	if Input.is_action_just_pressed("punch_left") or Input.is_action_just_pressed("punch_right"):
@@ -48,6 +66,11 @@ func is_hit(flip: bool) -> void:
 	elif not animated_sprite_2d.animation.contains('block') and not animated_sprite_2d.animation.contains('dodge'):
 		hit = true
 	
+	if animated_sprite_2d.animation.contains('block'):
+		blocked.emit(successful_block_time)
+		blocking = true
+		block_timer.start(successful_block_time)
+		
 	if hit:
 		if flip:
 			animation = 'hit_left'
@@ -55,6 +78,9 @@ func is_hit(flip: bool) -> void:
 		animated_sprite_2d.play(animation)
 	else:
 		dodge.emit()
+
+func toggle_block_off() -> void:
+	blocking = false
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 #	play appropriate punch after windup
